@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiClock, FiDollarSign, FiTrendingUp, FiArrowRight } from 'react-icons/fi';
-import { getTrendingServices } from '../../data/serviceData';
+import { getTrendingServices } from '../data/serviceData';
 import './TrendingServices.css';
 
 const TrendingServices = () => {

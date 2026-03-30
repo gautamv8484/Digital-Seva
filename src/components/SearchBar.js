@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiSearch, FiArrowRight } from 'react-icons/fi';
-import { searchServices } from '../../data/serviceData';
+import { searchServices } from '../data/serviceData';
 import './SearchBar.css';
 
 const SearchBar = () => {

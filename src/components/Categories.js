@@ -9,7 +9,7 @@ import {
   FaBriefcase,
   FaHeartbeat
 } from 'react-icons/fa';
-import { categories } from '../../data/serviceData';
+import { categories } from '../data/serviceData';
 import './Categories.css';
 
 const iconMap = {

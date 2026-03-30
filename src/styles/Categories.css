@@ -8,6 +8,15 @@
   margin-bottom: 48px;
 }
 
+.section-subtitle {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--text-gray);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -8,20 +8,27 @@ import {
   FiClock,
   FiDollarSign,
   FiArrowLeft,
-  FiShield
+  FiShield,
+  FiFile,
+  FiX
 } from 'react-icons/fi';
-import { getServiceById } from '../../data/serviceData';
-import './FormPage.css';
+import { getServiceById } from '../data/serviceData';
+import { useAuth } from '../context/AuthContext';
+import '../styles/FormPage.css';
 
 const FormPage = () => {
   const { serviceId } = useParams();
   const navigate = useNavigate();
   const service = getServiceById(serviceId);
+  
+  const { user, isAuthenticated } = useAuth();
 
   const [formData, setFormData] = useState({});
+  const [uploadedFiles, setUploadedFiles] = useState({});
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [applicationId, setApplicationId] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!service) {
     return (
@@ -36,17 +43,99 @@ const FormPage = () => {
     );
   }
 
+  // Handle text/select input changes
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: files ? files[0] : value
+      [name]: value
     }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
   };
 
+  // Handle file upload - Convert to Base64
+  const handleFileChange = async (e) => {
+    const { name, files } = e.target;
+    const file = files[0];
+    
+    if (!file) return;
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setErrors((prev) => ({ ...prev, [name]: 'File size must be less than 5MB' }));
+      return;
+    }
+
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+    if (!allowedTypes.includes(file.type)) {
+      setErrors((prev) => ({ ...prev, [name]: 'Only JPG, PNG, and PDF files are allowed' }));
+      return;
+    }
+
+    try {
+      // Convert file to Base64
+      const base64 = await convertToBase64(file);
+      
+      setUploadedFiles((prev) => ({
+        ...prev,
+        [name]: {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          data: base64,
+          uploadedAt: new Date().toISOString()
+        }
+      }));
+
+      // Mark as uploaded in formData
+      setFormData((prev) => ({
+        ...prev,
+        [name]: file.name
+      }));
+
+      if (errors[name]) {
+        setErrors((prev) => ({ ...prev, [name]: '' }));
+      }
+    } catch (error) {
+      setErrors((prev) => ({ ...prev, [name]: 'Failed to upload file. Please try again.' }));
+    }
+  };
+
+  // Convert file to Base64
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  // Remove uploaded file
+  const removeFile = (fieldName) => {
+    setUploadedFiles((prev) => {
+      const updated = { ...prev };
+      delete updated[fieldName];
+      return updated;
+    });
+    setFormData((prev) => {
+      const updated = { ...prev };
+      delete updated[fieldName];
+      return updated;
+    });
+  };
+
+  // Format file size
+  const formatFileSize = (bytes) => {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  };
+
+  // Validate form
   const validate = () => {
     const newErrors = {};
     service.fields.forEach((field) => {
@@ -57,7 +146,8 @@ const FormPage = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  // Handle form submit
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
@@ -65,12 +155,45 @@ const FormPage = () => {
       return;
     }
 
+    setIsSubmitting(true);
+
+    // Simulate processing time
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // Generate Application ID
     const appId = 'DSP' + Date.now().toString().slice(-8);
     setApplicationId(appId);
+
+    // Create application object with files
+    const applicationData = {
+      applicationId: appId,
+      serviceId: service.id,
+      serviceName: service.name,
+      categoryId: service.categoryId,
+      categoryName: service.categoryName,
+      fee: service.fee,
+      timeline: service.timeline,
+      status: 'submitted',
+      appliedDate: new Date().toISOString(),
+      formData: formData,
+      uploadedFiles: uploadedFiles, // 👈 Save files here!
+      applicantName: formData.fullName || formData.applicantName || formData.studentName || formData.ownerName || formData.childName || formData.groomName || formData.headOfFamily || 'N/A',
+      userId: isAuthenticated ? user?.id : null,
+      userName: isAuthenticated ? user?.fullName : null,
+      userMobile: isAuthenticated ? user?.mobile : (formData.mobile || null)
+    };
+
+    // Save to localStorage
+    const existingApplications = JSON.parse(localStorage.getItem('digitalSevaApplications') || '[]');
+    existingApplications.push(applicationData);
+    localStorage.setItem('digitalSevaApplications', JSON.stringify(existingApplications));
+
+    setIsSubmitting(false);
     setSubmitted(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Success Screen
   if (submitted) {
     return (
       <div className="form-page">
@@ -102,6 +225,15 @@ const FormPage = () => {
               <p className="success-note">
                 Please save this Application ID. You can use it to track your application status.
               </p>
+              
+              {/* Show uploaded files count */}
+              {Object.keys(uploadedFiles).length > 0 && (
+                <div className="success-files-info">
+                  <FiFile />
+                  <span>{Object.keys(uploadedFiles).length} document(s) uploaded successfully</span>
+                </div>
+              )}
+
               <div className="success-actions">
                 <Link to="/track" className="success-btn success-btn-primary">
                   Track Application
@@ -150,7 +282,7 @@ const FormPage = () => {
                     {service.fields.map((field) => (
                       <div
                         className={`form-group ${
-                          field.type === 'textarea' ? 'form-group-full' : ''
+                          field.type === 'textarea' || field.type === 'file' ? 'form-group-full' : ''
                         } ${errors[field.name] ? 'has-error' : ''}`}
                         key={field.name}
                       >
@@ -185,23 +317,43 @@ const FormPage = () => {
                             rows={3}
                           />
                         ) : field.type === 'file' ? (
-                          <div className="file-upload-wrapper">
-                            <input
-                              type="file"
-                              id={field.name}
-                              name={field.name}
-                              className="file-input"
-                              onChange={handleChange}
-                              accept=".pdf,.jpg,.jpeg,.png"
-                            />
-                            <label htmlFor={field.name} className="file-upload-label">
-                              <FiUpload className="upload-icon" />
-                              <span>
-                                {formData[field.name]
-                                  ? formData[field.name].name
-                                  : 'Click to upload (PDF, JPG, PNG)'}
-                              </span>
-                            </label>
+                          <div className="file-upload-container">
+                            {!uploadedFiles[field.name] ? (
+                              <div className="file-upload-wrapper">
+                                <input
+                                  type="file"
+                                  id={field.name}
+                                  name={field.name}
+                                  className="file-input"
+                                  onChange={handleFileChange}
+                                  accept=".pdf,.jpg,.jpeg,.png"
+                                />
+                                <label htmlFor={field.name} className="file-upload-label">
+                                  <FiUpload className="upload-icon" />
+                                  <span className="upload-text">Click to upload</span>
+                                  <span className="upload-hint">PDF, JPG, PNG (Max 5MB)</span>
+                                </label>
+                              </div>
+                            ) : (
+                              <div className="file-uploaded">
+                                <div className="file-info">
+                                  <FiFile className="file-icon" />
+                                  <div className="file-details">
+                                    <span className="file-name">{uploadedFiles[field.name].name}</span>
+                                    <span className="file-size">
+                                      {formatFileSize(uploadedFiles[field.name].size)}
+                                    </span>
+                                  </div>
+                                </div>
+                                <button
+                                  type="button"
+                                  className="file-remove-btn"
+                                  onClick={() => removeFile(field.name)}
+                                >
+                                  <FiX />
+                                </button>
+                              </div>
+                            )}
                           </div>
                         ) : (
                           <input
@@ -245,9 +397,22 @@ const FormPage = () => {
                       <FiArrowLeft />
                       Go Back
                     </button>
-                    <button type="submit" className="form-btn form-btn-submit">
-                      Submit Application
-                      <FiCheck />
+                    <button 
+                      type="submit" 
+                      className="form-btn form-btn-submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <span className="btn-spinner"></span>
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          Submit Application
+                          <FiCheck />
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
