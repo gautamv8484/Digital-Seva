@@ -1,0 +1,142 @@
+.why-choose-section {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+
+.why-choose-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.why-choose-left .section-title {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.accent-text {
+  color: var(--accent);
+}
+
+.why-choose-desc {
+  font-size: 1.05rem;
+  color: var(--text-gray);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.why-choose-highlight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--white);
+  padding: 20px 24px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border-left: 4px solid var(--accent);
+}
+
+.highlight-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.highlight-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.highlight-text strong {
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.highlight-text span {
+  font-size: 0.85rem;
+  color: var(--text-gray);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray);
+  transition: var(--transition);
+}
+
+.feature-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.feature-card:hover .feature-icon {
+  background: var(--gradient-accent);
+  color: var(--white);
+}
+
+.feature-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.feature-desc {
+  font-size: 0.82rem;
+  color: var(--text-gray);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .why-choose-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .why-choose-left {
+    text-align: center;
+  }
+
+  .why-choose-left .section-title {
+    text-align: center;
+  }
+
+  .why-choose-highlight {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .why-choose-section {
+    padding: 60px 0;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}

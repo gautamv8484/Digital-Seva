@@ -1,0 +1,146 @@
+.trending-section {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+.trending-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.trending-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.trending-card {
+  background: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trending-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+}
+
+.trending-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trending-category-badge {
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.trending-popularity {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.popularity-bar {
+  width: 40px;
+  height: 4px;
+  background: var(--light-gray);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.popularity-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+.popularity-text {
+  font-size: 0.7rem;
+  color: var(--text-gray);
+  font-weight: 600;
+}
+
+.trending-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+.trending-desc {
+  font-size: 0.82rem;
+  color: var(--text-gray);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.trending-meta {
+  display: flex;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--light-gray);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
+.meta-item svg {
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.trending-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.action-arrow {
+  transition: var(--transition);
+}
+
+.trending-card:hover .action-arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 1024px) {
+  .trending-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .trending-section {
+    padding: 60px 0;
+  }
+
+  .trending-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

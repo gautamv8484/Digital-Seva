@@ -1,0 +1,466 @@
+
+.form-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  margin-top: 20px;
+}
+.form-hero-title{
+  margin-top: 100px;
+}
+.form-card:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Card Header */
+.form-card-header {
+  background: linear-gradient(135deg, #f3f4f6 0%, #f9fafb 100%);
+  padding: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.form-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.form-card-desc {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.required-star {
+  color: #ef4444;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+/* ============================================
+   FORM FIELDS STYLES
+   ============================================ */
+
+.form-fields {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group-full {
+  grid-column: 1 / -1;
+}
+
+.form-group.has-error {
+  margin-bottom: 0.5rem;
+}
+
+.form-group.has-error .form-input,
+.form-group.has-error .form-select,
+.form-group.has-error .form-textarea,
+.form-group.has-error .file-upload-label {
+  border-color: #fca5a5;
+  background-color: #fef2f2;
+}
+
+/* Form Labels */
+.form-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================
+   FORM INPUTS STYLES
+   ============================================ */
+
+.form-input,
+.form-select,
+.form-textarea {
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', sans-serif;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+  color: #1f2937;
+  outline: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #9ca3af;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: #3b82f6;
+  background-color: #f0f9ff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-input:disabled,
+.form-select:disabled,
+.form-textarea:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+
+/* ============================================
+   FILE UPLOAD STYLES
+   ============================================ */
+
+.file-upload-wrapper {
+  position: relative;
+}
+
+.file-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+}
+
+.file-upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1rem;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.file-upload-label:hover {
+  border-color: #3b82f6;
+  background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+  color: #3b82f6;
+}
+
+.file-upload-label:active {
+  border-color: #1d4ed8;
+  background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+}
+
+.file-input:focus + .file-upload-label {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.upload-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   ERROR MESSAGES
+   ============================================ */
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #dc2626;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.error-message svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   FORM SUBMIT SECTION
+   ============================================ */
+
+.form-submit-section {
+  padding: 2rem;
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-agreement {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #f0fdf4;
+  border-left: 4px solid #22c55e;
+  border-radius: 6px;
+}
+
+.form-agreement input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  margin-top: 0.125rem;
+  cursor: pointer;
+  accent-color: #22c55e;
+  flex-shrink: 0;
+}
+
+.form-agreement label {
+  font-size: 0.9rem;
+  color: #374151;
+  cursor: pointer;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.form-agreement a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.form-agreement a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* ============================================
+   FORM BUTTONS
+   ============================================ */
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row-reverse;
+}
+
+.form-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  outline: none;
+  letter-spacing: -0.01em;
+}
+
+.form-btn-submit {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+  flex: 1;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.form-btn-submit:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+.form-btn-submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+.form-btn-back {
+  background: #ffffff;
+  color: #6b7280;
+  border: 1.5px solid #d1d5db;
+  min-width: 140px;
+  justify-content: center;
+}
+
+.form-btn-back:hover {
+  background: #f3f4f6;
+  color: #374151;
+  border-color: #9ca3af;
+}
+
+.form-btn-back:active {
+  background: #e5e7eb;
+}
+
+.form-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .form-fields {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .form-group-full {
+    grid-column: 1;
+  }
+
+  .form-card-header {
+    padding: 1.5rem;
+  }
+
+  .form-submit-section {
+    padding: 1.5rem;
+  }
+
+  .form-buttons {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .form-btn-back {
+    min-width: unset;
+  }
+
+  .form-agreement {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-agreement input[type='checkbox'] {
+    margin-top: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-card {
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+  }
+
+  .form-card-header {
+    padding: 1.25rem;
+  }
+
+  .form-card-title {
+    font-size: 1.25rem;
+  }
+
+  .form-fields {
+    padding: 1.25rem;
+    gap: 0.75rem;
+  }
+
+  .form-submit-section {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .file-upload-label {
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 0.7rem 0.875rem;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible,
+.form-btn:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes slideInForm {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-card {
+  animation: slideInForm 0.4s ease-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.form-group.has-error .form-input,
+.form-group.has-error .form-select,
+.form-group.has-error .form-textarea {
+  animation: shake 0.3s ease-in-out;
+}

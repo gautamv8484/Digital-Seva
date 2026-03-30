@@ -1,0 +1,130 @@
+.how-it-works-section {
+  padding: 100px 0;
+  background: var(--gradient-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.how-it-works-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+}
+
+.how-it-works-section .section-title {
+  color: var(--white);
+}
+
+.how-it-works-section .section-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.steps-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.step-card {
+  text-align: center;
+  padding: 32px 20px;
+  position: relative;
+}
+
+.step-number {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.05);
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  line-height: 1;
+}
+
+.step-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: var(--accent-light);
+  margin: 0 auto 24px;
+  transition: var(--transition);
+}
+
+.step-card:hover .step-icon-wrapper {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+  transform: scale(1.1);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+}
+
+.step-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.step-description {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.7;
+}
+
+.step-connector {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .steps-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .how-it-works-section {
+    padding: 60px 0;
+  }
+
+  .steps-container {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .step-card {
+    padding: 24px 20px;
+    text-align: left;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .step-icon-wrapper {
+    margin: 0;
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    font-size: 1.4rem;
+    border-radius: 16px;
+  }
+
+  .step-number {
+    display: none;
+  }
+}
