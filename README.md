@@ -14,6 +14,7 @@ A web-based Digital Seva system designed to provide and manage online citizen se
 - Backend: Node.js, Express.js
 - Database: MongoDB
 - Authentication: JWT / Session-based
+
 ## 📸 Screenshots
 ![Home](https://github.com/user-attachments/assets/e05ad47d-6a14-4a87-a3f0-3218885dbac5)
 ![Form-fill](https://github.com/user-attachments/assets/7ab107e2-1fd5-4d97-8917-7a0f0ede09f7)
