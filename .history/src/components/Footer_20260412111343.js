@@ -77,7 +77,7 @@ const Footer = () => {
               </li>
               <li>
                 <FiMapPin className="contact-icon" />
-                <span>Gandhinagar,Gujrat</span>
+                <span>New Delhi, India 110001</span>
               </li>
             </ul>
           </div>

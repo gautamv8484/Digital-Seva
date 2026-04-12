@@ -34,7 +34,7 @@ const ContactPage = () => {
       icon: FiPhone,
       title: 'Phone Support',
       description: 'Call us for immediate assistance',
-      details: '+91 99748 37395',
+      details: '+1 (800) 123-4567',
       subtext: 'Monday - Friday, 9AM - 6PM EST',
       color: 'primary'
     },
@@ -52,8 +52,8 @@ const ContactPage = () => {
       icon: FiMapPin,
       title: 'Visit Us',
       description: 'Come visit our office',
-      details: 'Rudra Digital-seva',
-      subtext: 'Gandhinagar Gujrat',
+      details: '123 Government Plaza, City Center',
+      subtext: 'New York, NY 10001',
       color: 'danger'
     },
     {

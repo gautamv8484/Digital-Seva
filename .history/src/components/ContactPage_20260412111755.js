@@ -53,7 +53,7 @@ const ContactPage = () => {
       title: 'Visit Us',
       description: 'Come visit our office',
       details: 'Rudra Digital-seva',
-      subtext: 'Gandhinagar Gujrat',
+      subtext: 'Gandhinagar',
       color: 'danger'
     },
     {

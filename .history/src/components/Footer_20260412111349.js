@@ -77,7 +77,7 @@ const Footer = () => {
               </li>
               <li>
                 <FiMapPin className="contact-icon" />
-                <span>Gandhinagar,Gujrat</span>
+                <span>Gandhinag</span>
               </li>
             </ul>
           </div>

@@ -73,11 +73,11 @@ const Footer = () => {
               </li>
               <li>
                 <FiPhone className="contact-icon" />
-                <span>+91 99748 37395</span>
+                <span>1(Toll Free)</span>
               </li>
               <li>
                 <FiMapPin className="contact-icon" />
-                <span>Gandhinagar,Gujrat</span>
+                <span>New Delhi, India 110001</span>
               </li>
             </ul>
           </div>

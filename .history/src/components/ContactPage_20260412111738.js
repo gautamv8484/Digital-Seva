@@ -52,8 +52,8 @@ const ContactPage = () => {
       icon: FiMapPin,
       title: 'Visit Us',
       description: 'Come visit our office',
-      details: 'Rudra Digital-seva',
-      subtext: 'Gandhinagar Gujrat',
+      details: 'Rudra',
+      subtext: 'New York, NY 10001',
       color: 'danger'
     },
     {
